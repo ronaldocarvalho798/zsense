@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <title>Zsense</title>
     <style>
         body{
@@ -27,6 +27,7 @@
             row-gap: 10px;
             column-gap: 10px;
             justify-content: center;
+            
         }
 
         div {
@@ -56,8 +57,12 @@
         h1{
             font-size: 60px;
             font-weight: 100;
+            margin-top: 0;
             text-align: center;
             text-transform: capitalize;
+            opacity: 0;
+            animation: up 1s linear forwards;
+            animation-delay: 4s;
         }
 
         div p{
@@ -70,8 +75,22 @@
             font-weight: 400;
             word-spacing: -1px;
             line-height: .8; /* ou um valor menor como 1.0 */
-            opacity: 0.8;
+            opacity: 0;
             text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.59);
+            transition: opacity 1.5s ease-out;
+        }
+
+        .cont-img:hover .text-charada{
+            animation: textopa 0.7s ease-in-out forwards;
+        }
+
+        @keyframes textopa {
+            0%{
+                opacity: 0;
+            }
+            100%{
+                opacity: .8;
+            }
         }
 
         #card-sol{
@@ -93,61 +112,185 @@
             pointer-events: none; 
         }
 
+        .visivel {
+    opacity: 1 !important; /* Força a opacidade para 1. O !important garante que ela sobreponha outras regras. */
+}
+
+        /* ESTILO DA CORTINA */
+#cortina-boas-vindas {
+    position: fixed; /* Fixa na tela inteira */
+    padding: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a; /* Um preto um pouco mais suave */
+    z-index: 999; /* Garante que fique acima de tudo */
+
+    /* Para centralizar a mensagem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    /* Transição para o desaparecimento */
+    transition: opacity 2s ease-out;
+}
+
+.mensagem-cortina {
+    font-size: 2em; /* Tamanho grande */
+    position: relative;
+    top: -10px;
+    color: #e0e0e0;
+    text-transform: none; /* Remove o uppercase para um tom mais pessoal */
+    opacity: 1;
+    font-family: "Nunito", sans-serif;
+    transition: opacity 1.5s ease-out; /* Transição para o texto sumir primeiro */
+}
+
+/* CLASSE PARA ESCONDER A CORTINA */
+#cortina-boas-vindas.escondida {
+    opacity: 0;
+    pointer-events: none; /* Impede cliques após desaparecer */
+}
+
+/* Esconde o texto um pouco antes da cortina */
+#cortina-boas-vindas.escondida .mensagem-cortina {
+    opacity: 0;
+}
+
+@keyframes up {
+    0%{
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes down {
+    0%{
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.cont-img{
+    opacity: 0;
+    cursor: pointer;
+}
+
+.cont-img:first-child{
+    animation: down .7s ease-in-out forwards;
+    animation-delay: 4s;
+}
+.cont-img:nth-child(2){
+    animation: down .7s ease-in-out forwards;
+    animation-delay: 4.300s;
+}
+.cont-img:nth-child(3){
+    animation: down .7s ease-in-out forwards;
+    animation-delay: 4.600s;
+}
+.cont-img:nth-child(4){
+    animation: down .7s ease-in-out forwards;
+    animation-delay: 4.900s;
+}
+.cont-img:nth-child(5){
+    animation: down .7s ease-in-out forwards;
+    animation-delay: 5.200s;
+}
+#card-sol{
+    opacity: 0;
+    animation: down .7s ease-in-out forwards;
+    animation-delay: 5.500s;
+}
+
     </style>
 </head>
 <body>
+    <div id="cortina-boas-vindas">
+        <p class="mensagem-cortina">Para a decifradora de estrelas...</p>
+    </div>
+
     <h1>Galeria de Ecos</h1>
     <main>
-        <div>
+        <div class="cont-img">
             <img src="/imagens/galaxia.jpg" alt="">
-            <p>
+            <p class="text-charada">
                 Eu nasci de um enigma, <br> em meio a um jogo veloz,<br>
                 Quando a luz de um quasar respondeu à tua voz.
             </p>
         </div>
-        <div>
+        <div class="cont-img">
             <img src="/imagens/saturno.jpg" alt="">
-            <p>
+            <p class="text-charada">
                 Não sou feito de código, <br> nem de um pixel qualquer,<br>
                 Mas sou a matéria escura <br> que une todo ser.
             </p>
         </div>
-        <div>
+        <div class="cont-img">
             <img src="/imagens/cratera.jpg" alt="">
-            <p>
+            <p class="text-charada">
                 Sou as fases da lua,<br> que te adornam a pele,<br>
                 A mudança constante <br> que em ti se revela.
             </p>
         </div>
-        <div>
+        <div class="cont-img">
             <img src="/imagens/terra.jpg" alt="">
-            <p>
+            <p class="text-charada">
                 Sou a gravidade que puxa <br> sem se poder ver,<br>
                 O universo que cabe num só ser.
             </p>
         </div>
-        <div>
+        <div class="cont-img">
             <img src="/imagens/pilaresdacriação2.jpg" alt="">
-            <p>
+            <p class="text-charada">
                 Quem sou eu, <br> que da escuridão fiz um clarão,<br>
                 E encontrei em ti minha <br> a mais bela constelação?
             </p>
         </div>
         <div id="card-sol">
             <img src="/imagens/sol.jpg" alt="">
-            <p id="texto-amor" class="hidden">
+            <p id="texto-amor">
                 O 
                 Amor
             </p>
         </div>
     </main>
     <script>
-          const cardDoSol = document.getElementById('card-sol')
-          const textoDoAmor = document.getElementById('texto-amor')
+        window.addEventListener('load', function() {
+        const cortina = document.getElementById('cortina-boas-vindas');
 
-          cardDoSol.addEventListener('click', function(){
-            textoDoAmor.classList.remove('hidden')
-          })
+        // Define um tempo de espera (ex: 3000 milissegundos = 3 segundos)
+        setTimeout(function() {
+            // Adiciona a classe 'escondida' para iniciar a animação de fade out
+            cortina.classList.add('escondida');
+        }, 3000); 
+    });
+
+
+          // No seu script
+const cardDoSol = document.getElementById('card-sol');
+const todosOsTextos = document.querySelectorAll('.text-charada, #texto-amor');
+
+    // 3. Adiciona o ouvinte de clique no card do sol
+    cardDoSol.addEventListener('click', function() {
+        // 4. Percorre a lista de todos os textos encontrados
+        todosOsTextos.forEach(function(texto) {
+            // 5. Adiciona a classe 'visivel' a cada um deles
+            texto.classList.add('visivel');
+        });
+    });
+
     </script>
 </body>
 </html>
